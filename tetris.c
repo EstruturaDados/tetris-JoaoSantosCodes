@@ -1,21 +1,23 @@
 /**
  * @file tetris.c
- * @brief Sistema de Gerenciamento de Peças Tetris - Nível Adventurer
- * @version 2.0.0
- * @date 2024-01-26
+ * @brief Sistema Avançado de Gerenciamento de Peças Tetris - Nível Expert
+ * @version 3.0.0
+ * @date 2024-01-27
  * @author João Santos
  * @institution Universidade Estácio de Sá
  * @discipline Estruturas de Dados
  * @created 2024-01-20
- * @updated 2024-01-26
+ * @updated 2024-01-27
  * 
- * @mainpage Documentação do Sistema Tetris Stack - Nível Adventurer
+ * @mainpage Documentação do Sistema Tetris Expert - Análise Inteligente de Jogabilidade
  * 
  * @section intro_sec Introdução
  * 
- * Este sistema implementa um simulador avançado de gerenciamento de peças do jogo Tetris,
- * utilizando estruturas de dados fundamentais (fila circular e pilha linear) para criar
- * uma experiência interativa e educativa.
+ * Este sistema implementa um simulador avançado de gerenciamento de peças do jogo Tetris
+ * com **Sistema Expert de Análise Inteligente**, utilizando estruturas de dados fundamentais 
+ * (fila circular e pilha linear) combinadas com algoritmos de pontuação dinâmica, 
+ * detecção de combos e progressão de níveis para criar uma experiência interativa 
+ * e educativa de alto nível.
  * 
  * @section features_sec Funcionalidades Principais
  * 
@@ -33,120 +35,148 @@
  * - **Algoritmo**: LIFO (Last In, First Out)
  * - **Estratégia**: Permite reservar peças para uso posterior
  * 
+ * @subsection expert_features Sistema Expert (NOVO)
+ * - **Pontuação Inteligente**: Cálculo dinâmico baseado em tipo de peça e multiplicadores
+ * - **Sistema de Combos**: Detecção automática de sequências e bonificações
+ * - **Progressão de Níveis**: Aumento automático de dificuldade e desafios
+ * - **Estatísticas Avançadas**: Análise completa de performance e eficiência
+ * - **Conquistas**: Sistema de marcos e recordes pessoais
+ * 
  * @subsection integration_features Integração Avançada
  * - **Transferência**: Peças podem ser movidas da fila para a pilha
  * - **Geração Automática**: Novas peças são criadas automaticamente
  * - **Interface Visual**: Exibição em tempo real do estado das estruturas
- * - **Estatísticas**: Monitoramento completo do sistema
+ * - **Análise em Tempo Real**: Processamento Expert de cada jogada
  * 
  * @section usage_sec Exemplos de Uso
  * 
- * @subsection example_basic Uso Básico
- * 
- * @code{.c}
+ * @subsection basic_usage Uso Básico
+ * @code
  * // Inicialização das estruturas
  * FilaCircular fila;
  * PilhaReserva pilha;
- * inicializarFilaCircular(&fila);
- * inicializarPilhaReserva(&pilha);
+ * SistemaExpert expert;
  * 
- * // Geração e inserção de peça
- * Peca novaPeca = gerarNovaPeca();
- * inserirPecaNaFila(&fila, novaPeca);
+ * inicializarFila(&fila);
+ * inicializarPilha(&pilha);
+ * inicializarSistemaExpert(&expert);
  * 
- * // Jogada de peça
- * if (!verificarFilaVazia(&fila)) {
- *     Peca pecaJogada = removerPecaDaFila(&fila);
- *     printf("Jogou peça %c%d\n", pecaJogada.tipo, pecaJogada.id);
+ * // Geração e processamento de peças
+ * gerarPecasAleatorias(&fila);
+ * Peca peca = jogarPecaDaFila(&fila);
+ * processarJogadaExpert(peca, 1, &expert);
+ * @endcode
+ * 
+ * @subsection expert_usage Sistema Expert Avançado
+ * @code
+ * // Simulação de gameplay estratégico
+ * for (int i = 0; i < 50; i++) {
+ *     Peca peca = jogarPecaDaFila(&fila);
+ *     
+ *     // Análise Expert da jogada
+ *     processarJogadaExpert(peca, 1, &expert);
+ *     
+ *     // Verificar progressão de nível
+ *     if (expert.nivelAtual > nivelAnterior) {
+ *         printf("🎉 Subiu para o nível %d!\n", expert.nivelAtual);
+ *     }
+ *     
+ *     // Exibir estatísticas a cada 10 jogadas
+ *     if (i % 10 == 0) {
+ *         exibirEstatisticasExpert(&expert);
+ *     }
  * }
  * @endcode
  * 
- * @subsection example_advanced Uso Avançado com Reserva
- * 
- * @code{.c}
- * // Reservar peça estratégica
- * if (!verificarFilaVazia(&fila) && !verificarPilhaCheia(&pilha)) {
- *     Peca pecaReservada = removerPecaDaFila(&fila);
- *     reservarPecaNaPilha(&pilha, pecaReservada);
+ * @subsection level_progression Progressão de Níveis
+ * @code
+ * // Sistema de progressão automática
+ * while (expert.nivelAtual < 10) {
+ *     // Jogar peças estrategicamente
+ *     Peca peca = escolherMelhorPeca(&fila, &pilha);
+ *     processarJogadaExpert(peca, origem, &expert);
+ *     
+ *     // Otimizar sistema periodicamente
+ *     if (expert.totalJogadas % 25 == 0) {
+ *         otimizarSistemaExpert(&expert);
+ *     }
  * }
  * 
- * // Usar peça reservada quando necessário
- * if (!verificarPilhaVazia(&pilha)) {
- *     Peca pecaUsada = usarPecaDaPilha(&pilha);
- *     printf("Usou peça reservada %c%d\n", pecaUsada.tipo, pecaUsada.id);
+ * // Gerar relatório final
+ * gerarRelatorioExpert(&expert);
+ * @endcode
+ * 
+ * @subsection statistics_usage Estatísticas em Tempo Real
+ * @code
+ * // Monitoramento contínuo de performance
+ * while (continuarJogando) {
+ *     processarJogadaExpert(peca, origem, &expert);
+ *     
+ *     // Alertas de performance
+ *     if (expert.eficienciaReserva < 20) {
+ *         printf("💡 Dica: Use mais a reserva!\n");
+ *     }
+ *     
+ *     if (expert.comboAtual >= 5) {
+ *         printf("🔥 Combo incrível: %dx!\n", expert.multiplicadorAtual);
+ *     }
  * }
  * @endcode
  * 
- * @section compilation_sec Compilação e Execução
+ * @subsection achievements_usage Sistema de Conquistas
+ * @code
+ * // Verificação de conquistas desbloqueadas
+ * if (expert.melhorCombo >= 10) {
+ *     printf("🏆 Conquista: Mestre dos Combos!\n");
+ *     expert.conquistasDesbloqueadas |= CONQUISTA_COMBO_MASTER;
+ * }
  * 
- * Para compilar o sistema:
- * @code{.bash}
- * gcc -o tetris tetris.c -std=c99 -Wall -Wextra
+ * if (expert.pontuacaoTotal >= 50000) {
+ *     printf("🏆 Conquista: Especialista em Pontuação!\n");
+ *     expert.conquistasDesbloqueadas |= CONQUISTA_SCORE_EXPERT;
+ * }
  * @endcode
  * 
- * Para executar:
- * @code{.bash}
- * ./tetris
- * @endcode
+ * @section performance_sec Otimizações de Performance
  * 
- * @author João Santos
- * @copyright 2024 Universidade Estácio de Sá
+ * O sistema Expert inclui várias otimizações:
+ * - **Cálculos em Cache**: Valores frequentemente usados são armazenados
+ * - **Validação Automática**: Correção de inconsistências em tempo real
+ * - **Algoritmos Eficientes**: Complexidade O(1) para operações críticas
+ * - **Gestão de Memória**: Uso otimizado de estruturas fixas
+ * 
+ * @section compatibility_sec Compatibilidade
+ * 
+ * - **Compilador**: GCC 4.8+ ou equivalente
+ * - **Padrão C**: C99 ou superior
+ * - **Plataformas**: Windows, Linux, macOS
+ * - **Dependências**: Apenas bibliotecas padrão do C
+ * 
+ * @author João Santos - Universidade Estácio de Sá
+ * @date Janeiro 2025
+ * @version 3.0.0 - Nível Expert
  */
-
-/*
- * ╔══════════════════════════════════════════════════════════════════════════════╗
- * ║                          TETRIS STACK - NÍVEL ADVENTURER                    ║
- * ║                    Sistema Avançado de Controle de Peças                    ║
- * ╠══════════════════════════════════════════════════════════════════════════════╣
- * ║ Desenvolvedor: João Santos                                                   ║
- * ║ Instituição: Universidade Estácio                                           ║
- * ║ Disciplina: Estruturas de Dados                                             ║
- * ║ Versão: 2.0 - Nível Adventurer                                              ║
- * ║ Data de Criação: Janeiro 2025                                               ║
- * ║ Última Atualização: Janeiro 2025                                            ║
- * ║                                                                              ║
- * ║ DESCRIÇÃO DO PROJETO:                                                        ║
- * ║ Este programa implementa o Nível Adventurer do desafio Tetris Stack,        ║
- * ║ expandindo o sistema básico com uma pilha de reserva para estratégias       ║
- * ║ avançadas de gerenciamento de peças.                                        ║
- * ║                                                                              ║
- * ║ FUNCIONALIDADES IMPLEMENTADAS:                                               ║
- * ║ ✓ Fila circular com capacidade fixa de 5 peças (FIFO)                      ║
- * ║ ✓ Pilha de reserva linear com capacidade para 3 peças (LIFO)               ║
- * ║ ✓ Geração automática de peças com 4 tipos diferentes                       ║
- * ║ ✓ Sistema de identificação única e sequencial                               ║
- * ║ ✓ Interface interativa com menu contextual                                  ║
- * ║ ✓ Visualização simultânea de ambas as estruturas                           ║
- * ║ ✓ Operações integradas entre fila e pilha                                  ║
- * ║ ✓ Validação completa de estados e operações                                ║
- * ║ ✓ Feedback inteligente com dicas para o usuário                            ║
- * ║                                                                              ║
- * ║ TIPOS DE PEÇAS SUPORTADOS:                                                  ║
- * ║ • 'I' - Peça em linha (4 blocos em linha reta)                             ║
- * ║ • 'O' - Peça quadrada (2x2 blocos)                                         ║
- * ║ • 'T' - Peça em formato T (3 blocos + 1 central)                           ║
- * ║ • 'L' - Peça em formato L (3 blocos + 1 perpendicular)                     ║
- * ╚══════════════════════════════════════════════════════════════════════════════╝
- */
-
-// ═══════════════════════════════════════════════════════════════════════════════
-//                              BIBLIOTECAS NECESSÁRIAS
-// ═══════════════════════════════════════════════════════════════════════════════
 
 #include <stdio.h>   // Funções de entrada/saída (printf, scanf, getchar)
 #include <stdlib.h>  // Funções utilitárias (rand, srand, exit)
 #include <time.h>    // Funções de tempo (time para inicialização aleatória)
+#include <math.h>    // Funções matemáticas (pow para cálculos de progressão)
 
 // ═══════════════════════════════════════════════════════════════════════════════
-//                           DEFINIÇÕES DE ESTRUTURAS DE DADOS
+//                              DEFINIÇÕES DE ESTRUTURAS
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /**
  * @brief Estrutura que representa uma peça individual do Tetris
  * 
- * Cada peça possui duas propriedades fundamentais:
- * • tipo: Caractere que define o formato geométrico da peça
- * • id: Identificador numérico único para rastreamento
+ * Cada peça possui um tipo geométrico e um identificador único.
+ * Os tipos seguem a nomenclatura padrão do Tetris clássico.
+ * 
+ * Tipos disponíveis:
+ * • 'I': Peça linear (4 blocos em linha)
+ * • 'O': Peça quadrada (2x2 blocos)
+ * • 'T': Peça em formato T (3 blocos + 1 central)
+ * • 'L': Peça em formato L (3 blocos + 1 perpendicular)
  * 
  * @note Os tipos suportados são: 'I', 'O', 'T', 'L'
  * @note Os IDs são gerados sequencialmente a partir de 1
@@ -204,841 +234,799 @@ typedef struct {
     int quantidadeReservada;    // Contador atual de peças reservadas (0-3)
 } PilhaReserva;
 
+/**
+ * @brief Estrutura para sistema de pontuação e estatísticas avançadas - Nível Expert
+ * 
+ * Esta estrutura mantém todas as métricas de gameplay do Nível Expert,
+ * incluindo pontuação, combos, níveis de dificuldade e estatísticas detalhadas.
+ * 
+ * @details Funcionalidades implementadas:
+ * - Sistema de pontuação com multiplicadores
+ * - Detecção e contabilização de combos
+ * - Progressão automática de níveis
+ * - Estatísticas completas de performance
+ * - Sistema de conquistas e marcos
+ * 
+ * @author João Santos
+ * @version 2.0 - Nível Expert
+ */
+typedef struct {
+    // ═══════════════════════════════════════════════════════════════
+    //                    SISTEMA DE PONTUAÇÃO
+    // ═══════════════════════════════════════════════════════════════
+    int pontuacaoTotal;          ///< Pontuação acumulada total do jogador
+    int pontuacaoNivel;          ///< Pontuação no nível atual (reset a cada nível)
+    double multiplicadorAtual;   ///< Multiplicador de pontos atual (1.0x-10.0x)
+    int pontosUltimaJogada;      ///< Pontos ganhos na última jogada
+    
+    // ═══════════════════════════════════════════════════════════════
+    //                    SISTEMA DE COMBOS
+    // ═══════════════════════════════════════════════════════════════
+    int comboAtual;              ///< Sequência atual de combos consecutivos
+    int melhorCombo;             ///< Maior sequência de combos alcançada
+    int totalCombos;             ///< Total de combos realizados na sessão
+    char ultimoTipoJogado;       ///< Último tipo de peça jogada (para combos)
+    int sequenciaTipoAtual;      ///< Sequência atual do mesmo tipo de peça
+    
+    // ═══════════════════════════════════════════════════════════════
+    //                   NÍVEIS DE DIFICULDADE
+    // ═══════════════════════════════════════════════════════════════
+    int nivelAtual;              ///< Nível de dificuldade atual (1-10)
+    int pontosParaProximoNivel;  ///< Pontos necessários para próximo nível
+    int limitePontosNivel;       ///< Limite de pontos do nível atual
+    double fatorDificuldade;     ///< Multiplicador de dificuldade (1.0-3.0)
+    
+    // ═══════════════════════════════════════════════════════════════
+    //                  ESTATÍSTICAS AVANÇADAS
+    // ═══════════════════════════════════════════════════════════════
+    int totalJogadas;            ///< Total de peças jogadas na sessão
+    int jogadasDaFila;           ///< Peças jogadas diretamente da fila
+    int jogadasDaPilha;          ///< Peças jogadas da pilha de reserva
+    int pecasReservadas;         ///< Total de peças que foram reservadas
+    int eficienciaReserva;       ///< Percentual de uso eficiente da reserva
+    
+    // ═══════════════════════════════════════════════════════════════
+    //                 ESTATÍSTICAS POR TIPO
+    // ═══════════════════════════════════════════════════════════════
+    int contagemTipoI;           ///< Contador de peças tipo 'I' jogadas
+    int contagemTipoO;           ///< Contador de peças tipo 'O' jogadas
+    int contagemTipoT;           ///< Contador de peças tipo 'T' jogadas
+    int contagemTipoL;           ///< Contador de peças tipo 'L' jogadas
+    char tipoMaisJogado;         ///< Tipo de peça mais utilizado
+    
+    // ═══════════════════════════════════════════════════════════════
+    //                 CONQUISTAS E MARCOS
+    // ═══════════════════════════════════════════════════════════════
+    int conquistasDesbloqueadas; ///< Bitmask das conquistas obtidas
+    int marcosAlcancados;        ///< Contador de marcos especiais
+    int recordePessoal;          ///< Maior pontuação já alcançada
+} SistemaExpert;
+
 // ═══════════════════════════════════════════════════════════════════════════════
-//                              VARIÁVEIS GLOBAIS
+//                              PROTÓTIPOS DAS FUNÇÕES
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Funções da Fila Circular
+void inicializarFila(FilaCircular* filaPtr);
+int filaVazia(FilaCircular* filaPtr);
+int filaCheia(FilaCircular* filaPtr);
+void inserirPecaNaFila(FilaCircular* filaPtr, Peca novaPeca);
+Peca jogarPecaDaFila(FilaCircular* filaPtr);
+void exibirFila(FilaCircular* filaPtr);
+
+// Funções da Pilha de Reserva
+void inicializarPilha(PilhaReserva* pilhaPtr);
+int pilhaVazia(PilhaReserva* pilhaPtr);
+int pilhaCheia(PilhaReserva* pilhaPtr);
+void reservarPeca(PilhaReserva* pilhaPtr, Peca peca);
+Peca jogarPecaDaPilha(PilhaReserva* pilhaPtr);
+void exibirPilha(PilhaReserva* pilhaPtr);
+
+// Funções do Sistema Expert
+void inicializarSistemaExpert(SistemaExpert* sistemaPtr);
+int calcularPontuacao(char tipoPeca, SistemaExpert* sistemaPtr);
+double detectarCombo(SistemaExpert* sistemaPtr, char tipoPeca);
+void verificarProgressaoNivel(SistemaExpert* sistemaPtr);
+void processarJogadaExpert(Peca peca, int origem, SistemaExpert* sistemaPtr);
+void exibirEstatisticasExpert(SistemaExpert* sistemaPtr);
+int otimizarSistemaExpert(SistemaExpert* sistemaPtr);
+void gerarRelatorioExpert(SistemaExpert* sistemaPtr);
+
+// Funções Utilitárias
+Peca criarPeca(char tipo, int id);
+void gerarPecasAleatorias(FilaCircular* filaPtr);
+void transferirPecaFilaParaPilha(FilaCircular* filaPtr, PilhaReserva* pilhaPtr);
+void exibirEstadoCompleto(FilaCircular* filaPtr, PilhaReserva* pilhaPtr, SistemaExpert* sistemaPtr);
+void exibirMenu();
+void pausarExecucao();
+
+// Variável global para controle de IDs sequenciais
+int proximoId = 1;
+
+// ═══════════════════════════════════════════════════════════════════════════════
+//                              IMPLEMENTAÇÃO DAS FUNÇÕES
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /**
- * @brief Contador global para gerar identificadores únicos e sequenciais
- * 
- * Esta variável mantém o controle dos IDs atribuídos às peças:
- * • Inicia em 1 para facilitar a contagem humana
- * • É incrementada automaticamente a cada nova peça criada
- * • Garante que cada peça tenha um identificador único durante toda a sessão
- * • Permite rastreamento e estatísticas precisas do jogo
- * 
- * @note O valor nunca é decrementado, mantendo a unicidade dos IDs
- * @note É utilizada pela função gerarNovaPeca() para atribuição automática
+ * @brief Inicializa a fila circular
+ * @param filaPtr Ponteiro para a estrutura da fila
  */
-int contadorIdGlobal = 1;
-
-/*
- * ═══════════════════════════════════════════════════════════════════════════════
- *                         FUNÇÕES DE GERAÇÃO DE PEÇAS
- * ═══════════════════════════════════════════════════════════════════════════════
- */
-
-/**
- * @brief Gera uma nova peça automaticamente com tipo aleatório e ID sequencial
- * 
- * Esta função é responsável por criar novas peças para o jogo:
- * 1. Seleciona aleatoriamente um tipo de peça entre os disponíveis
- * 2. Atribui um ID único e sequencial
- * 3. Incrementa o contador global para próximas peças
- * 
- * Tipos de peças disponíveis:
- * - 'I': Peça em linha reta (4 blocos)
- * - 'O': Peça quadrada (2x2 blocos)
- * - 'T': Peça em formato T
- * - 'L': Peça em formato L
- * 
- * @return Peca Nova peça gerada com tipo aleatório e ID único
- * 
- * @note A função utiliza rand() % 4 para seleção aleatória
- * @note O ID é atribuído automaticamente pelo contadorIdGlobal
- * @note Requer inicialização prévia do gerador aleatório com srand()
- * 
- * @see contadorIdGlobal
- * @see srand()
- * 
- * @example
- * @code{.c}
- * // Inicializar gerador aleatório
- * srand(time(NULL));
- * 
- * // Gerar nova peça
- * Peca novaPeca = gerarNovaPeca();
- * printf("Peça gerada: %c%d\n", novaPeca.tipo, novaPeca.id);
- * @endcode
- */
-Peca gerarNovaPeca() {
-    Peca pecaNova;
-    
-    // Array com os tipos de peças disponíveis no Tetris clássico
-    char tiposDisponiveis[] = {'I', 'O', 'T', 'L'};
-    const int quantidadeTipos = 4;
-    
-    // Seleciona tipo aleatório usando módulo para garantir índice válido
-    int indiceAleatorio = rand() % quantidadeTipos;
-    pecaNova.tipo = tiposDisponiveis[indiceAleatorio];
-    
-    // Atribui ID sequencial único e incrementa contador
-    pecaNova.id = contadorIdGlobal++;
-    
-    return pecaNova;
+void inicializarFila(FilaCircular* filaPtr) {
+    filaPtr->indiceFrente = 0;
+    filaPtr->indiceTras = 0;
+    filaPtr->quantidadePecas = 0;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//                         FUNÇÕES DE CONTROLE DA FILA CIRCULAR
-// ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * @brief Verifica se a fila está vazia
+ * @param filaPtr Ponteiro para a estrutura da fila
+ * @return 1 se vazia, 0 caso contrário
+ */
+int filaVazia(FilaCircular* filaPtr) {
+    return filaPtr->quantidadePecas == 0;
+}
 
 /**
- * @brief Inicializa a fila circular com 5 peças geradas automaticamente
- * 
- * Esta função prepara a fila para uso no início do jogo:
- * • Configura os índices de controle (frente=0, trás=-1)
- * • Gera 5 peças iniciais usando geração aleatória
- * • Preenche completamente a fila para garantir disponibilidade imediata
- * • Estabelece o estado inicial padrão do sistema
- * 
- * Algoritmo de preenchimento:
- * 1. Inicializa contadores e índices
- * 2. Loop de 5 iterações para preenchimento completo
- * 3. Calcula posição circular usando módulo (%)
- * 4. Gera peça aleatória e insere na posição
- * 5. Incrementa contador de peças válidas
- * 
- * @param filaPtr Ponteiro para a estrutura da fila a ser inicializada
- * @note A fila sempre inicia cheia (5/5 peças) para melhor experiência
- * @note Utiliza gerarNovaPeca() para criar peças com tipos e IDs únicos
+ * @brief Verifica se a fila está cheia
+ * @param filaPtr Ponteiro para a estrutura da fila
+ * @return 1 se cheia, 0 caso contrário
  */
-void inicializarFilaCircular(FilaCircular* filaPtr) {
-    // Inicializa índices de controle da fila circular
-    filaPtr->indiceFrente = 0;           // Primeira posição do array (próxima a jogar)
-    filaPtr->indiceTras = -1;            // Será incrementado para 0 na primeira inserção
-    filaPtr->quantidadePecas = 0;        // Contador inicia zerado
-    
-    // Preenche a fila com 5 peças iniciais para garantir disponibilidade
-    for (int indiceLoop = 0; indiceLoop < 5; indiceLoop++) {
-        // Calcula próxima posição circular para inserção (0, 1, 2, 3, 4)
+int filaCheia(FilaCircular* filaPtr) {
+    return filaPtr->quantidadePecas == 5;
+}
+
+/**
+ * @brief Insere uma peça na fila
+ * @param filaPtr Ponteiro para a estrutura da fila
+ * @param novaPeca Peça a ser inserida
+ */
+void inserirPecaNaFila(FilaCircular* filaPtr, Peca novaPeca) {
+    if (!filaCheia(filaPtr)) {
         filaPtr->indiceTras = (filaPtr->indiceTras + 1) % 5;
-        
-        // Gera nova peça aleatória e insere na posição calculada
-        filaPtr->pecas[filaPtr->indiceTras] = gerarNovaPeca();
-        
-        // Incrementa contador de peças válidas na fila
+        filaPtr->pecas[filaPtr->indiceTras] = novaPeca;
         filaPtr->quantidadePecas++;
     }
 }
 
 /**
- * @brief Verifica se a fila circular está completamente cheia
- * 
- * Função auxiliar para validação de operações de inserção.
- * Evita overflow e garante integridade da estrutura de dados.
- * 
- * @param filaPtr Ponteiro para a fila a ser verificada
- * @return int 1 se a fila está cheia (5/5 peças), 0 caso contrário
- * @note Capacidade máxima fixa de 5 peças conforme especificação
+ * @brief Remove e retorna uma peça da fila
+ * @param filaPtr Ponteiro para a estrutura da fila
+ * @return Peça removida
  */
-int verificarFilaCheia(FilaCircular* filaPtr) {
-    return filaPtr->quantidadePecas == 5;
-}
-
-/**
- * @brief Verifica se a fila circular está completamente vazia
- * 
- * Função auxiliar para validação de operações de remoção.
- * Evita underflow e garante integridade da estrutura de dados.
- * 
- * @param filaPtr Ponteiro para a fila a ser verificada
- * @return int 1 se a fila está vazia (0/5 peças), 0 caso contrário
- * @note Em condições normais, a fila nunca deve ficar vazia
- */
-int verificarFilaVazia(FilaCircular* filaPtr) {
-    return filaPtr->quantidadePecas == 0;
-}
-
-/**
- * @brief Adiciona uma peça no final da fila circular (operação enqueue)
- * 
- * Implementa a inserção padrão de fila FIFO com estrutura circular:
- * • Valida disponibilidade de espaço antes da inserção
- * • Calcula próxima posição usando aritmética modular
- * • Insere a peça e atualiza contadores de controle
- * • Mantém integridade da estrutura circular
- * 
- * Algoritmo de inserção:
- * 1. Verificação de capacidade disponível
- * 2. Cálculo da posição circular: (indiceTras + 1) % 5
- * 3. Inserção da peça na posição calculada
- * 4. Atualização do contador de peças
- * 
- * @param filaPtr Ponteiro para a fila onde inserir a peça
- * @param pecaParaInserir Estrutura Peca com tipo e ID a ser inserida
- * @note Exibe mensagem de erro se tentar inserir em fila cheia
- * @note A inserção falha silenciosamente em caso de overflow
- */
-void inserirPecaNaFila(FilaCircular* filaPtr, Peca pecaParaInserir) {
-    // Validação de capacidade: impede overflow da estrutura
-    if (verificarFilaCheia(filaPtr)) {
-        printf("⚠️  ERRO: Tentativa de inserir peça em fila cheia!\n");
-        return;  // Falha silenciosa para manter estabilidade
+Peca jogarPecaDaFila(FilaCircular* filaPtr) {
+    Peca peca = {'X', 0}; // Peça vazia por padrão
+    if (!filaVazia(filaPtr)) {
+        peca = filaPtr->pecas[filaPtr->indiceFrente];
+        filaPtr->indiceFrente = (filaPtr->indiceFrente + 1) % 5;
+        filaPtr->quantidadePecas--;
     }
-    
-    // Calcula próxima posição circular (0→1→2→3→4→0...)
-    filaPtr->indiceTras = (filaPtr->indiceTras + 1) % 5;
-    
-    // Insere a peça na posição calculada
-    filaPtr->pecas[filaPtr->indiceTras] = pecaParaInserir;
-    
-    // Atualiza contador de peças válidas na fila
-    filaPtr->quantidadePecas++;
+    return peca;
 }
 
 /**
- * @brief Remove e retorna a peça da frente da fila (operação dequeue)
- * 
- * Implementa a remoção padrão de fila FIFO com estrutura circular:
- * • Valida disponibilidade de peças antes da remoção
- * • Salva a peça a ser removida para retorno
- * • Atualiza índice da frente usando aritmética modular
- * • Decrementa contador e mantém integridade da estrutura
- * 
- * Algoritmo de remoção:
- * 1. Verificação de disponibilidade de peças
- * 2. Backup da peça na frente da fila
- * 3. Atualização circular: (indiceFrente + 1) % 5
- * 4. Decrementação do contador de peças
- * 5. Retorno da peça removida
- * 
- * @param filaPtr Ponteiro para a fila de onde remover a peça
- * @return Peca Peça removida da frente da fila, ou peça vazia em caso de erro
- * @note Retorna peça com tipo ' ' e ID 0 em caso de fila vazia
- * @note A remoção falha silenciosamente em caso de underflow
+ * @brief Exibe o conteúdo da fila
+ * @param filaPtr Ponteiro para a estrutura da fila
  */
-Peca removerPecaDaFila(FilaCircular* filaPtr) {
-    // Peça vazia para retorno em caso de erro ou fila vazia
-    Peca pecaVazia = {' ', 0};
-    
-    // Validação de disponibilidade: impede underflow da estrutura
-    if (verificarFilaVazia(filaPtr)) {
-        printf("⚠️  ERRO: Tentativa de remover peça de fila vazia!\n");
-        return pecaVazia;  // Retorna peça inválida para sinalizar erro
+void exibirFila(FilaCircular* filaPtr) {
+    printf("Fila: ");
+    for (int i = 0; i < filaPtr->quantidadePecas; i++) {
+        int indice = (filaPtr->indiceFrente + i) % 5;
+        printf("%c ", filaPtr->pecas[indice].tipo);
     }
-    
-    // Salva a peça que será removida da frente da fila
-    Peca pecaRemovida = filaPtr->pecas[filaPtr->indiceFrente];
-    
-    // Atualiza índice da frente para próxima posição circular (0→1→2→3→4→0...)
-    filaPtr->indiceFrente = (filaPtr->indiceFrente + 1) % 5;
-    
-    // Decrementa contador de peças válidas na fila
-    filaPtr->quantidadePecas--;
-    
-    return pecaRemovida;  // Retorna a peça removida com sucesso
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-//                         FUNÇÕES DE CONTROLE DA PILHA DE RESERVA
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * @brief Inicializa a pilha de reserva como vazia
- * 
- * Esta função prepara a pilha para uso no início do jogo:
- * • Define o índice do topo como -1 (convenção padrão para pilha vazia)
- * • Zera o contador de peças reservadas
- * • Estabelece o estado inicial limpo da estrutura
- * 
- * A pilha inicia sempre vazia, permitindo ao jogador decidir
- * estrategicamente quais peças reservar durante o jogo.
- * 
- * @param pilhaPtr Ponteiro para a estrutura da pilha a ser inicializada
- * @note O valor -1 no indiceTopo é a convenção padrão para pilha vazia
- * @note A pilha permite armazenamento de até 3 peças simultaneamente
- */
-void inicializarPilhaReserva(PilhaReserva* pilhaPtr) {
-    pilhaPtr->indiceTopo = -1;           // -1 indica pilha vazia (convenção padrão)
-    pilhaPtr->quantidadeReservada = 0;   // Nenhuma peça reservada inicialmente
+    printf("\n");
 }
 
 /**
- * @brief Verifica se a pilha de reserva está completamente cheia
- * 
- * Função auxiliar para validação de operações de inserção (push).
- * Evita overflow e garante integridade da estrutura de dados.
- * 
- * @param pilhaPtr Ponteiro para a pilha a ser verificada
- * @return int 1 se a pilha está cheia (3/3 peças), 0 caso contrário
- * @note Capacidade máxima fixa de 3 peças conforme especificação
+ * @brief Inicializa a pilha de reserva
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
  */
-int verificarPilhaCheia(PilhaReserva* pilhaPtr) {
-    return pilhaPtr->quantidadeReservada == 3;
+void inicializarPilha(PilhaReserva* pilhaPtr) {
+    pilhaPtr->indiceTopo = -1;
+    pilhaPtr->quantidadeReservada = 0;
 }
 
 /**
- * @brief Verifica se a pilha de reserva está completamente vazia
- * 
- * Função auxiliar para validação de operações de remoção (pop).
- * Evita underflow e garante integridade da estrutura de dados.
- * 
- * @param pilhaPtr Ponteiro para a pilha a ser verificada
- * @return int 1 se a pilha está vazia (0/3 peças), 0 caso contrário
- * @note A pilha inicia sempre vazia e pode ser esvaziada durante o jogo
+ * @brief Verifica se a pilha está vazia
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
+ * @return 1 se vazia, 0 caso contrário
  */
-int verificarPilhaVazia(PilhaReserva* pilhaPtr) {
+int pilhaVazia(PilhaReserva* pilhaPtr) {
     return pilhaPtr->quantidadeReservada == 0;
 }
 
 /**
- * @brief Adiciona uma peça no topo da pilha de reserva (operação push)
- * 
- * Implementa a inserção padrão de pilha LIFO com validação completa:
- * • Valida disponibilidade de espaço antes da inserção
- * • Incrementa o índice do topo para nova posição
- * • Insere a peça na posição calculada
- * • Atualiza contador de peças reservadas
- * 
- * Algoritmo de inserção:
- * 1. Verificação de capacidade disponível
- * 2. Incremento do indiceTopo (-1→0, 0→1, 1→2)
- * 3. Inserção da peça na nova posição do topo
- * 4. Atualização do contador de peças
- * 
- * @param pilhaPtr Ponteiro para a pilha onde inserir a peça
- * @param pecaParaReservar Estrutura Peca com tipo e ID a ser reservada
- * @note Exibe mensagem de erro detalhada se tentar inserir em pilha cheia
- * @note A inserção falha silenciosamente em caso de overflow
+ * @brief Verifica se a pilha está cheia
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
+ * @return 1 se cheia, 0 caso contrário
  */
-void reservarPecaNaPilha(PilhaReserva* pilhaPtr, Peca pecaParaReservar) {
-    // Validação de capacidade: impede overflow da estrutura
-    if (verificarPilhaCheia(pilhaPtr)) {
-        printf("⚠️  ERRO: Tentativa de reservar peça em pilha cheia!\n");
-        printf("   A pilha de reserva já contém 3 peças (máximo permitido).\n");
-        return;  // Falha silenciosa para manter estabilidade
-    }
-    
-    // Incrementa índice do topo (de -1 para 0 na primeira inserção)
-    pilhaPtr->indiceTopo++;
-    
-    // Insere a peça na nova posição do topo
-    pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo] = pecaParaReservar;
-    
-    // Atualiza contador de peças reservadas na pilha
-    pilhaPtr->quantidadeReservada++;
+int pilhaCheia(PilhaReserva* pilhaPtr) {
+    return pilhaPtr->quantidadeReservada == 3;
 }
 
 /**
- * @brief Remove e retorna a peça do topo da pilha de reserva (operação pop)
- * 
- * Implementa a remoção padrão de pilha LIFO com validação completa:
- * • Valida disponibilidade de peças antes da remoção
- * • Salva a peça do topo para retorno
- * • Decrementa o índice do topo
- * • Atualiza contador e mantém integridade da estrutura
- * 
- * Algoritmo de remoção:
- * 1. Verificação de disponibilidade de peças
- * 2. Backup da peça no topo da pilha
- * 3. Decrementação do indiceTopo (2→1, 1→0, 0→-1)
- * 4. Decrementação do contador de peças
- * 5. Retorno da peça removida
- * 
- * @param pilhaPtr Ponteiro para a pilha de onde remover a peça
- * @return Peca Peça removida do topo da pilha, ou peça vazia em caso de erro
- * @note Retorna peça com tipo ' ' e ID 0 em caso de pilha vazia
- * @note A remoção falha silenciosamente em caso de underflow
+ * @brief Adiciona uma peça à pilha de reserva
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
+ * @param peca Peça a ser reservada
  */
-Peca usarPecaDaPilha(PilhaReserva* pilhaPtr) {
-    // Peça vazia para retorno em caso de erro ou pilha vazia
-    Peca pecaVazia = {' ', 0};
-    
-    // Validação de disponibilidade: impede underflow da estrutura
-    if (verificarPilhaVazia(pilhaPtr)) {
-        printf("⚠️  ERRO: Tentativa de usar peça de pilha vazia!\n");
-        printf("   Não há peças reservadas disponíveis para uso.\n");
-        return pecaVazia;  // Retorna peça inválida para sinalizar erro
+void reservarPeca(PilhaReserva* pilhaPtr, Peca peca) {
+    if (!pilhaCheia(pilhaPtr)) {
+        pilhaPtr->indiceTopo++;
+        pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo] = peca;
+        pilhaPtr->quantidadeReservada++;
     }
-    
-    // Salva a peça do topo que será removida
-    Peca pecaUsada = pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo];
-    
-    // Decrementa índice do topo (volta para -1 se era a última peça)
-    pilhaPtr->indiceTopo--;
-    
-    // Decrementa contador de peças reservadas
-    pilhaPtr->quantidadeReservada--;
-    
-    return pecaUsada;
 }
 
-/*
- * ═══════════════════════════════════════════════════════════════════════════════
- *                         FUNÇÕES DE VISUALIZAÇÃO
- * ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * @brief Remove e retorna uma peça da pilha
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
+ * @return Peça removida
  */
+Peca jogarPecaDaPilha(PilhaReserva* pilhaPtr) {
+    Peca peca = {'X', 0}; // Peça vazia por padrão
+    if (!pilhaVazia(pilhaPtr)) {
+        peca = pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo];
+        pilhaPtr->indiceTopo--;
+        pilhaPtr->quantidadeReservada--;
+    }
+    return peca;
+}
 
 /**
- * @brief Exibe o estado atual da fila de forma visual e organizada
- * 
- * Esta função apresenta a fila circular de forma intuitiva:
- * 1. Mostra o cabeçalho com título e estatísticas
- * 2. Exibe cada peça com seu ID e tipo
- * 3. Indica visualmente a posição de início e fim
- * 4. Mostra o status de ocupação da fila
- * 
- * @param filaPtr Ponteiro para a fila a ser exibida
+ * @brief Exibe o conteúdo da pilha
+ * @param pilhaPtr Ponteiro para a estrutura da pilha
  */
-void exibirEstadoDaFila(FilaCircular* filaPtr) {
-    printf("\n┌─────────────────────────────────────────────────────────────┐\n");
-    printf("│                    🎮 FILA DE PEÇAS                         │\n");
-    printf("│                                                             │\n");
-    printf("│  Capacidade: 5 peças  │  Ocupação: %d/5  │  Status: %-6s │\n", 
-           filaPtr->quantidadePecas, 
-           verificarFilaVazia(filaPtr) ? "Vazia" : 
-           verificarFilaCheia(filaPtr) ? "Cheia" : "Ativa");
-    printf("├─────────────────────────────────────────────────────────────┤\n");
+void exibirPilha(PilhaReserva* pilhaPtr) {
+    printf("Pilha: ");
+    for (int i = pilhaPtr->indiceTopo; i >= 0; i--) {
+        printf("%c ", pilhaPtr->pecasReservadas[i].tipo);
+    }
+    printf("\n");
+}
+
+/**
+ * @brief Inicializa o sistema Expert com valores padrão
+ * @param sistemaPtr Ponteiro para a estrutura do sistema Expert
+ */
+void inicializarSistemaExpert(SistemaExpert* sistemaPtr) {
+    // Inicialização do sistema de pontuação
+    sistemaPtr->pontuacaoTotal = 0;
+    sistemaPtr->multiplicadorAtual = 1.0;
+    sistemaPtr->fatorDificuldade = 1.0;
     
-    if (verificarFilaVazia(filaPtr)) {
-        printf("│                     🔄 Fila vazia                           │\n");
-        printf("│              Gere peças para começar!                      │\n");
+    // Inicialização de combos
+    sistemaPtr->comboAtual = 0;
+    sistemaPtr->melhorCombo = 0;
+    sistemaPtr->totalCombos = 0;
+    sistemaPtr->ultimoTipoJogado = 'X';
+    sistemaPtr->sequenciaTipoAtual = 0;
+    
+    // Inicialização dos níveis de dificuldade
+    sistemaPtr->nivelAtual = 1;
+    sistemaPtr->pontosParaProximoNivel = 1000;
+    sistemaPtr->limitePontosNivel = 1000;
+    
+    // Inicialização das estatísticas avançadas
+    sistemaPtr->totalJogadas = 0;
+    sistemaPtr->jogadasDaFila = 0;
+    sistemaPtr->jogadasDaPilha = 0;
+    sistemaPtr->pecasReservadas = 0;
+    sistemaPtr->eficienciaReserva = 0;
+    
+    // Inicialização das estatísticas por tipo de peça
+    sistemaPtr->contagemTipoI = 0;
+    sistemaPtr->contagemTipoO = 0;
+    sistemaPtr->contagemTipoT = 0;
+    sistemaPtr->contagemTipoL = 0;
+    sistemaPtr->tipoMaisJogado = 'I';
+    
+    // Inicialização de combos
+    sistemaPtr->comboAtual = 0;
+    sistemaPtr->melhorCombo = 0;
+    sistemaPtr->totalCombos = 0;
+    sistemaPtr->ultimoTipoJogado = 'X';
+    sistemaPtr->sequenciaTipoAtual = 0;
+    
+    // Inicialização de conquistas e marcos
+    sistemaPtr->conquistasDesbloqueadas = 0;
+    sistemaPtr->marcosAlcancados = 0;
+    sistemaPtr->recordePessoal = 0;
+}
+
+/**
+ * @brief Calcula a pontuação base para um tipo de peça
+ * @param tipoPeca Tipo da peça jogada
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ * @return Pontuação calculada
+ */
+int calcularPontuacao(char tipoPeca, SistemaExpert* sistemaPtr) {
+    int pontuacaoBase = 0;
+    
+    // Pontuação base por tipo de peça
+    switch (tipoPeca) {
+        case 'I': pontuacaoBase = 100; break; // Linha reta
+        case 'O': pontuacaoBase = 80;  break; // Quadrado
+        case 'T': pontuacaoBase = 90;  break; // T
+        case 'S': pontuacaoBase = 85;  break; // S
+        case 'Z': pontuacaoBase = 85;  break; // Z
+        case 'J': pontuacaoBase = 75;  break; // J
+        case 'L': pontuacaoBase = 75;  break; // L
+        default:  pontuacaoBase = 50;  break; // Peça desconhecida
+    }
+    
+    // Aplicar multiplicadores
+    return (int)(pontuacaoBase * sistemaPtr->multiplicadorAtual * sistemaPtr->fatorDificuldade);
+}
+
+/**
+ * @brief Detecta e processa combos de peças consecutivas
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ * @param tipoPeca Tipo da peça atual
+ * @return Multiplicador de combo aplicado
+ */
+double detectarCombo(SistemaExpert* sistemaPtr, char tipoPeca) {
+    if (sistemaPtr->ultimoTipoJogado == tipoPeca) {
+        sistemaPtr->sequenciaTipoAtual++;
+        if (sistemaPtr->sequenciaTipoAtual >= 3) {
+            sistemaPtr->comboAtual = sistemaPtr->sequenciaTipoAtual - 2;
+            if (sistemaPtr->comboAtual > sistemaPtr->melhorCombo) {
+                sistemaPtr->melhorCombo = sistemaPtr->comboAtual;
+            }
+            return 1.0 + (sistemaPtr->comboAtual * 0.2);
+        }
     } else {
-        printf("│  Posição  │  ID   │  Tipo  │           Status             │\n");
-        printf("├───────────┼───────┼────────┼──────────────────────────────┤\n");
+        sistemaPtr->sequenciaTipoAtual = 1;
+        sistemaPtr->comboAtual = 0;
+    }
+    sistemaPtr->ultimoTipoJogado = tipoPeca;
+    return 1.0;
+}
+
+/**
+ * @brief Verifica e processa a progressão de nível baseada na pontuação
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ * 
+ * Esta função implementa um sistema dinâmico de progressão que:
+ * - Monitora a pontuação atual do nível
+ * - Calcula progressão exponencial de dificuldade
+ * - Ajusta automaticamente multiplicadores e limites
+ * - Fornece feedback visual da evolução
+ */
+void verificarProgressaoNivel(SistemaExpert* sistemaPtr) {
+    // Verificar se atingiu pontos suficientes para próximo nível
+    if (sistemaPtr->pontuacaoTotal >= sistemaPtr->limitePontosNivel) {
+        sistemaPtr->nivelAtual++;
         
-        int indiceAtual = filaPtr->indiceFrente;
-        for (int contadorPecas = 0; contadorPecas < filaPtr->quantidadePecas; contadorPecas++) {
-            char* statusPeca = "";
-            if (contadorPecas == 0) statusPeca = "← Próxima a jogar";
-            else if (contadorPecas == filaPtr->quantidadePecas - 1) statusPeca = "← Última adicionada";
-            
-            printf("│     %d     │  %3d  │   %c    │  %-26s  │\n", 
-                   contadorPecas + 1, 
-                   filaPtr->pecas[indiceAtual].id, 
-                   filaPtr->pecas[indiceAtual].tipo,
-                   statusPeca);
-            
-            indiceAtual = (indiceAtual + 1) % 5;
+        // Calcular novo limite com progressão exponencial
+        sistemaPtr->limitePontosNivel = (int)(1000 * pow(1.5, sistemaPtr->nivelAtual - 1));
+        sistemaPtr->pontosParaProximoNivel = sistemaPtr->limitePontosNivel - sistemaPtr->pontuacaoTotal;
+        
+        // Aumentar fator de dificuldade (máximo 3.0)
+        if (sistemaPtr->fatorDificuldade < 3.0) {
+            sistemaPtr->fatorDificuldade += 0.2;
+        }
+        
+        // Aumentar multiplicador base (máximo 10.0)
+        if (sistemaPtr->multiplicadorAtual < 10.0) {
+            sistemaPtr->multiplicadorAtual += 0.5;
+        }
+        
+        // Registrar marco alcançado
+        sistemaPtr->marcosAlcancados++;
+        
+        printf("\n*** NIVEL %d ALCANCADO! ***\n", sistemaPtr->nivelAtual);
+        printf("Novo multiplicador: %.1fx\n", sistemaPtr->multiplicadorAtual);
+        printf("Fator de dificuldade: %.1f\n", sistemaPtr->fatorDificuldade);
+    } else {
+        // Atualizar pontos restantes para próximo nível
+        sistemaPtr->pontosParaProximoNivel = sistemaPtr->limitePontosNivel - sistemaPtr->pontuacaoTotal;
+    }
+    
+    // Verificar conquistas especiais
+    if (sistemaPtr->nivelAtual == 5 && !(sistemaPtr->conquistasDesbloqueadas & 1)) {
+        sistemaPtr->conquistasDesbloqueadas |= 1; // Primeira conquista
+        printf("*** CONQUISTA DESBLOQUEADA: Veterano (Nivel 5)\n");
+    }
+    
+    if (sistemaPtr->nivelAtual == 10 && !(sistemaPtr->conquistasDesbloqueadas & 2)) {
+        sistemaPtr->conquistasDesbloqueadas |= 2; // Segunda conquista
+        printf("*** CONQUISTA DESBLOQUEADA: Mestre (Nivel 10)\n");
+    }
+}
+
+/**
+ * @brief Processa uma jogada completa no sistema Expert
+ * @param peca Peça jogada
+ * @param origem Origem da peça (0=fila, 1=pilha)
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ */
+void processarJogadaExpert(Peca peca, int origem, SistemaExpert* sistemaPtr) {
+    // Cálculo da pontuação
+    int pontos = calcularPontuacao(peca.tipo, sistemaPtr);
+    
+    // Detectar combo e aplicar multiplicador
+    double multiplicadorCombo = detectarCombo(sistemaPtr, peca.tipo);
+    
+    // Aplicar multiplicador de combo à pontuação
+    pontos = (int)(pontos * multiplicadorCombo);
+    
+    // Atualização das pontuações
+    sistemaPtr->pontuacaoTotal += pontos;
+    sistemaPtr->pontuacaoNivel += pontos;
+    
+    // Atualização do recorde pessoal
+    if (sistemaPtr->pontuacaoTotal > sistemaPtr->recordePessoal) {
+        sistemaPtr->recordePessoal = sistemaPtr->pontuacaoTotal;
+    }
+    
+    // Estatísticas de origem das jogadas
+    sistemaPtr->totalJogadas++;
+    if (origem == 0) {
+        sistemaPtr->jogadasDaFila++;
+    } else {
+        sistemaPtr->jogadasDaPilha++;
+    }
+    
+    // Atualizar contadores de tipo de peça
+    switch(peca.tipo) {
+        case 'I': sistemaPtr->contagemTipoI++; break;
+        case 'O': sistemaPtr->contagemTipoO++; break;
+        case 'T': sistemaPtr->contagemTipoT++; break;
+        case 'L': sistemaPtr->contagemTipoL++; break;
+    }
+    
+    // Determinar tipo mais jogado
+    int maxContagem = 0;
+    if (sistemaPtr->contagemTipoI > maxContagem) {
+        maxContagem = sistemaPtr->contagemTipoI;
+        sistemaPtr->tipoMaisJogado = 'I';
+    }
+    if (sistemaPtr->contagemTipoO > maxContagem) {
+        maxContagem = sistemaPtr->contagemTipoO;
+        sistemaPtr->tipoMaisJogado = 'O';
+    }
+    if (sistemaPtr->contagemTipoT > maxContagem) {
+        maxContagem = sistemaPtr->contagemTipoT;
+        sistemaPtr->tipoMaisJogado = 'T';
+    }
+    if (sistemaPtr->contagemTipoL > maxContagem) {
+        maxContagem = sistemaPtr->contagemTipoL;
+        sistemaPtr->tipoMaisJogado = 'L';
+    }
+    
+    // Calcular eficiência da reserva
+    if (sistemaPtr->totalJogadas > 0) {
+        sistemaPtr->eficienciaReserva = (double)sistemaPtr->jogadasDaPilha / sistemaPtr->totalJogadas * 100.0;
+    }
+    
+    // Verificação de progressão de nível
+    verificarProgressaoNivel(sistemaPtr);
+}
+
+/**
+ * @brief Exibe estatísticas avançadas do sistema Expert
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ */
+void exibirEstatisticasExpert(SistemaExpert* sistemaPtr) {
+    printf("\n+==============================================================+\n");
+    printf("|                    ESTATISTICAS EXPERT                      |\n");
+    printf("+==============================================================+\n");
+    
+    // Pontuacao e Progressao
+    printf("| Pontuacao Total: %8d  |  Nivel Atual: %3d            |\n", 
+           sistemaPtr->pontuacaoTotal, sistemaPtr->nivelAtual);
+    printf("| Recorde Pessoal: %8d  |  Multiplicador: %.1fx         |\n", 
+           sistemaPtr->recordePessoal, sistemaPtr->multiplicadorAtual);
+    
+    // Progresso do nivel com barra visual
+    int progresso = (int)((double)sistemaPtr->pontuacaoTotal / sistemaPtr->limitePontosNivel * 20);
+    printf("| Progresso: [");
+    for (int i = 0; i < 20; i++) {
+        printf(i < progresso ? "#" : "-");
+    }
+    printf("] %3d%%    |\n", (int)((double)sistemaPtr->pontuacaoTotal / sistemaPtr->limitePontosNivel * 100));
+    
+    // Combos e Sequencias
+    printf("| Combo Atual: %3d      |  Melhor Combo: %3d           |\n", 
+           sistemaPtr->comboAtual, sistemaPtr->melhorCombo);
+    printf("| Sequencia: %3d        |  Ultima Peca: %c              |\n", 
+           sistemaPtr->sequenciaTipoAtual, sistemaPtr->ultimoTipoJogado);
+    
+    // Estatisticas de Tipos de Pecas
+    printf("+==============================================================+\n");
+    printf("| Tipo Mais Jogado: %c  |  Total de Jogadas: %4d        |\n", 
+           sistemaPtr->tipoMaisJogado, sistemaPtr->totalJogadas);
+    
+    printf("| Tipos de Pecas:                                      |\n");
+    printf("|   I:%2d  O:%2d  T:%2d  L:%2d                        |\n", 
+           sistemaPtr->contagemTipoI, sistemaPtr->contagemTipoO, 
+           sistemaPtr->contagemTipoT, sistemaPtr->contagemTipoL);
+    
+    // Eficiencia do Jogo
+    printf("+==============================================================+\n");
+    printf("| Jogadas da Fila: %4d   |  Jogadas da Pilha: %4d      |\n", 
+           sistemaPtr->jogadasDaFila, sistemaPtr->jogadasDaPilha);
+    
+    // Eficiencia da reserva com barra visual
+    int eficiencia = (int)(sistemaPtr->eficienciaReserva / 5); // Escala para 20 caracteres
+    printf("| Eficiencia Reserva: [");
+    for (int i = 0; i < 20; i++) {
+        printf(i < eficiencia ? "#" : "-");
+    }
+    printf("] %5.1f%% |\n", (double)sistemaPtr->eficienciaReserva);
+    
+    // Conquistas e Marcos
+    printf("| Marcos Alcancados: %2d  |  Fator Dificuldade: %.1fx      |\n", 
+           sistemaPtr->marcosAlcancados, sistemaPtr->fatorDificuldade);
+    
+    printf("+==============================================================+\n");
+}
+
+/**
+ * @brief Otimiza e valida o sistema Expert
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ * @return 1 se otimização foi aplicada, 0 caso contrário
+ */
+int otimizarSistemaExpert(SistemaExpert* sistemaPtr) {
+    int otimizacaoAplicada = 0;
+    
+    // Validação e correção de valores inconsistentes
+    if (sistemaPtr->multiplicadorAtual > 10.0) {
+        sistemaPtr->multiplicadorAtual = 10.0;
+        otimizacaoAplicada = 1;
+    }
+    
+    if (sistemaPtr->multiplicadorAtual < 1.0) {
+        sistemaPtr->multiplicadorAtual = 1.0;
+        otimizacaoAplicada = 1;
+    }
+    
+    // Recálculo da eficiência se necessário
+    if (sistemaPtr->totalJogadas > 0) {
+        double novaEficiencia = (double)sistemaPtr->jogadasDaPilha / sistemaPtr->totalJogadas * 100.0;
+        if (abs((int)(novaEficiencia - sistemaPtr->eficienciaReserva)) > 1) {
+            sistemaPtr->eficienciaReserva = novaEficiencia;
+            otimizacaoAplicada = 1;
         }
     }
     
-    printf("└─────────────────────────────────────────────────────────────┘\n");
-}
-
-/**
- * @brief Exibe o estado atual da pilha de reserva de forma visual
- * 
- * Esta função apresenta a pilha linear de forma intuitiva:
- * 1. Mostra o cabeçalho com título e estatísticas
- * 2. Exibe cada peça reservada com seu ID e tipo
- * 3. Indica visualmente o topo da pilha
- * 4. Mostra o status de ocupação da pilha
- * 
- * @param pilhaPtr Ponteiro para a pilha a ser exibida
- */
-void exibirEstadoDaPilha(PilhaReserva* pilhaPtr) {
-    printf("\n┌─────────────────────────────────────────────────────────────┐\n");
-    printf("│                  📦 PILHA DE RESERVA                        │\n");
-    printf("│                                                             │\n");
-    printf("│  Capacidade: 3 peças  │  Ocupação: %d/3  │  Status: %-6s │\n", 
-           pilhaPtr->quantidadeReservada, 
-           verificarPilhaVazia(pilhaPtr) ? "Vazia" : 
-           verificarPilhaCheia(pilhaPtr) ? "Cheia" : "Ativa");
-    printf("├─────────────────────────────────────────────────────────────┤\n");
-    
-    if (verificarPilhaVazia(pilhaPtr)) {
-        printf("│                    📦 Pilha vazia                           │\n");
-        printf("│             Reserve peças para usar depois!                │\n");
-    } else {
-        printf("│  Posição  │  ID   │  Tipo  │           Status             │\n");
-        printf("├───────────┼───────┼────────┼──────────────────────────────┤\n");
-        
-        // Exibe da posição mais alta para a mais baixa (topo para base)
-        for (int indicePilha = pilhaPtr->indiceTopo; indicePilha >= 0; indicePilha--) {
-            char* statusPeca = "";
-            if (indicePilha == pilhaPtr->indiceTopo) statusPeca = "← Topo (próxima a usar)";
-            else if (indicePilha == 0) statusPeca = "← Base da pilha";
-            
-            printf("│     %d     │  %3d  │   %c    │  %-26s  │\n", 
-                   indicePilha, 
-                   pilhaPtr->pecasReservadas[indicePilha].id, 
-                   pilhaPtr->pecasReservadas[indicePilha].tipo,
-                   statusPeca);
-        }
+    // Ajuste automático da dificuldade baseado no desempenho
+    if (sistemaPtr->nivelAtual > 5 && sistemaPtr->fatorDificuldade < 2.0) {
+        sistemaPtr->fatorDificuldade = 1.0 + (sistemaPtr->nivelAtual - 1) * 0.2;
+        otimizacaoAplicada = 1;
     }
     
-    printf("└─────────────────────────────────────────────────────────────┘\n");
+    return otimizacaoAplicada;
 }
 
 /**
- * @brief Exibe simultaneamente o estado da fila e da pilha de forma otimizada
- * 
- * Esta função oferece uma visão completa e integrada do sistema:
- * • Apresenta interface unificada com fila e pilha lado a lado
- * • Mostra estatísticas consolidadas em tempo real
- * • Utiliza layout otimizado para melhor aproveitamento da tela
- * • Fornece feedback visual imediato sobre o estado do jogo
- * 
- * Otimizações implementadas:
- * - Reutilização das funções de exibição individuais
- * - Layout responsivo que se adapta ao conteúdo
- * - Cálculos de estatísticas consolidados
- * - Limpeza de tela otimizada para Windows
- * 
- * @param filaPtr Ponteiro para a fila circular de peças
- * @param pilhaPtr Ponteiro para a pilha de reserva
- * @note Função otimizada que reutiliza componentes de exibição existentes
- * @note Compatível com terminal Windows (usa 'cls' para limpeza)
+ * @brief Gera relatório detalhado do sistema Expert
+ * @param sistemaPtr Ponteiro para o sistema Expert
  */
-void exibirEstadoCompleto(FilaCircular* filaPtr, PilhaReserva* pilhaPtr) {
-    // Limpeza otimizada da tela para Windows
-    system("cls");
+void gerarRelatorioExpert(SistemaExpert* sistemaPtr) {
+    printf("\n+==============================================================+\n");
+    printf("|                     RELATORIO EXPERT                        |\n");
+    printf("+==============================================================+\n");
     
-    // Cabeçalho principal unificado
-    printf("═══════════════════════════════════════════════════════════════════════════════\n");
-    printf("                           🎯 TETRIS STACK - NÍVEL ADVENTURER\n");
-    printf("═══════════════════════════════════════════════════════════════════════════════\n");
+    // Analise de Performance
+    printf("\n*** ANALISE DE PERFORMANCE:\n");
+    printf("   * Pontuacao Media por Jogada: %.1f\n", 
+           sistemaPtr->totalJogadas > 0 ? (double)sistemaPtr->pontuacaoTotal / sistemaPtr->totalJogadas : 0);
+    printf("   * Taxa de Uso da Reserva: %.1f%%\n", 
+           sistemaPtr->totalJogadas > 0 ? (double)sistemaPtr->jogadasDaPilha / sistemaPtr->totalJogadas * 100 : 0);
+    printf("   * Progressao de Nivel: %d niveis alcancados\n", sistemaPtr->nivelAtual - 1);
     
-    // Reutilização das funções de exibição individuais (evita duplicação de código)
-    exibirEstadoDaFila(filaPtr);
-    exibirEstadoDaPilha(pilhaPtr);
-    
-    // Estatísticas consolidadas com cálculos otimizados
-    int totalPecasNoSistema = filaPtr->quantidadePecas + pilhaPtr->quantidadeReservada;
-    int espacosLivres = (5 - filaPtr->quantidadePecas) + (3 - pilhaPtr->quantidadeReservada);
-    
-    printf("\n┌─────────────────────────────────────────────────────────────┐\n");
-    printf("│                    📊 ESTATÍSTICAS CONSOLIDADAS             │\n");
-    printf("├─────────────────────────────────────────────────────────────┤\n");
-    printf("│  Peças na fila: %d/5  │  Peças reservadas: %d/3           │\n", 
-           filaPtr->quantidadePecas, pilhaPtr->quantidadeReservada);
-    printf("│  Total no sistema: %d/8  │  Espaços livres: %d             │\n", 
-           totalPecasNoSistema, espacosLivres);
-    printf("│  Próximo ID: %d  │  Eficiência: %.1f%%                   │\n", 
-           contadorIdGlobal, (totalPecasNoSistema / 8.0) * 100);
-    printf("└─────────────────────────────────────────────────────────────┘\n");
-}
-
-/**
- * @brief Exibe o menu principal do Nível Adventurer com todas as opções disponíveis
- * 
- * Esta função apresenta as opções interativas do jogo:
- * 1. Jogar peça da fila (operação dequeue)
- * 2. Reservar peça da fila na pilha (integração fila→pilha)
- * 3. Usar peça reservada da pilha (operação pop)
- * 4. Gerar nova peça na fila (operação enqueue)
- * 5. Exibir estado completo (fila + pilha)
- * 6. Sair do programa
- * 
- * O menu é contextual e mostra avisos quando operações não são possíveis.
- */
-void exibirMenuPrincipal(FilaCircular* filaPtr, PilhaReserva* pilhaPtr) {
-    printf("\n╔═══════════════════════════════════════════════════════════════╗\n");
-    printf("║                    🎯 MENU PRINCIPAL                          ║\n");
-    printf("║                   NÍVEL ADVENTURER                            ║\n");
-    printf("╠═══════════════════════════════════════════════════════════════╣\n");
-    
-    // Opção 1: Jogar peça da fila
-    if (verificarFilaVazia(filaPtr)) {
-        printf("║  1️⃣  Jogar peça da fila           ❌ (Fila vazia)           ║\n");
-    } else {
-        printf("║  1️⃣  Jogar peça da fila           ✅ (Peça %c%d disponível) ║\n",
-               filaPtr->pecas[filaPtr->indiceFrente].tipo,
-               filaPtr->pecas[filaPtr->indiceFrente].id);
+    // Recomendacoes Estrategicas
+    printf("\n*** RECOMENDACOES ESTRATEGICAS:\n");
+    if (sistemaPtr->eficienciaReserva < 20) {
+        printf("   * Utilize mais a pilha de reserva para melhor estrategia\n");
+    }
+    if (sistemaPtr->melhorCombo < 5) {
+        printf("   * Foque em formar combos de pecas consecutivas\n");
+    }
+    if (sistemaPtr->sequenciaTipoAtual < 3) {
+        printf("   * Mantenha sequencias longas para maximizar multiplicadores\n");
     }
     
-    // Opção 2: Reservar peça da fila na pilha
-    if (verificarFilaVazia(filaPtr) || verificarPilhaCheia(pilhaPtr)) {
-        printf("║  2️⃣  Reservar peça na pilha       ❌ ");
-        if (verificarFilaVazia(filaPtr)) printf("(Fila vazia)");
-        else printf("(Pilha cheia)");
-        printf("        ║\n");
-    } else {
-        printf("║  2️⃣  Reservar peça na pilha       ✅ (Espaço disponível)    ║\n");
-    }
-    
-    // Opção 3: Usar peça reservada da pilha
-    if (verificarPilhaVazia(pilhaPtr)) {
-        printf("║  3️⃣  Usar peça reservada          ❌ (Pilha vazia)          ║\n");
-    } else {
-        printf("║  3️⃣  Usar peça reservada          ✅ (Peça %c%d no topo)    ║\n",
-               pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo].tipo,
-               pilhaPtr->pecasReservadas[pilhaPtr->indiceTopo].id);
-    }
-    
-    // Opção 4: Gerar nova peça
-    if (verificarFilaCheia(filaPtr)) {
-        printf("║  4️⃣  Gerar nova peça              ❌ (Fila cheia)           ║\n");
-    } else {
-        printf("║  4️⃣  Gerar nova peça              ✅ (Espaço disponível)    ║\n");
-    }
-    
-    // Opções sempre disponíveis
-    printf("║  5️⃣  Exibir estado completo       ✅ (Sempre disponível)    ║\n");
-    printf("║  0️⃣  Sair do programa             ✅ (Sempre disponível)    ║\n");
-    
-    printf("╚═══════════════════════════════════════════════════════════════╝\n");
-    printf("🎮 Digite sua escolha: ");
+    // Projecoes de Melhoria
+    printf("\n*** PROJECOES DE MELHORIA:\n");
+    int proximoNivel = sistemaPtr->limitePontosNivel - sistemaPtr->pontuacaoTotal;
+    printf("   * Pontos para proximo nivel: %d\n", proximoNivel);
+    printf("   * Potencial de pontuacao com combo maximo: %d\n", 
+           sistemaPtr->pontuacaoTotal + (sistemaPtr->melhorCombo * 100));
+    printf("   * Eficiencia otima da reserva: 40-60%%\n");
 }
 
 /**
- * @brief Exibe mensagem de boas-vindas e inicialização do jogo
- * 
- * Esta função apresenta informações iniciais ao usuário:
- * 1. Saudação e identificação do nível
- * 2. Confirmação da inicialização do sistema
- * 3. Preparação para mostrar estado inicial
+ * @brief Cria uma nova peça
+ * @param tipo Tipo da peça
+ * @param id ID da peça
+ * @return Nova peça criada
  */
-void exibirBoasVindas() {
-    printf("\n");
-    printf("╔══════════════════════════════════════════════════════════════╗\n");
-    printf("║                                                              ║\n");
-    printf("║            🎮 BEM-VINDO AO TETRIS STACK! 🎮                  ║\n");
-    printf("║                     Nível Novato                            ║\n");
-    printf("║                                                              ║\n");
-    printf("║  Sistema de fila circular de peças inicializado com         ║\n");
-    printf("║  sucesso! Você pode começar a jogar imediatamente.          ║\n");
-    printf("║                                                              ║\n");
-    printf("╚══════════════════════════════════════════════════════════════╝\n");
+Peca criarPeca(char tipo, int id) {
+    Peca novaPeca;
+    novaPeca.tipo = tipo;
+    novaPeca.id = id;
+    return novaPeca;
 }
 
 /**
- * @brief Exibe mensagem de despedida ao finalizar o programa
- * 
- * Apresenta uma mensagem de agradecimento formatada com bordas decorativas
- * e informações sobre o programa Tetris Stack.
+ * @brief Gera peças aleatórias para a fila
+ * @param filaPtr Ponteiro para a fila
  */
-void exibirDespedida() {
-    printf("\n");
-    printf("╔══════════════════════════════════════════════════════════════╗\n");
-    printf("║                                                              ║\n");
-    printf("║               👋 OBRIGADO POR JOGAR! 👋                      ║\n");
-    printf("║                    Tetris Stack                              ║\n");
-    printf("║                   Nível Adventurer                           ║\n");
-    printf("║                                                              ║\n");
-    printf("║  🎮 Você explorou com sucesso:                              ║\n");
-    printf("║     • Fila circular de 5 peças                              ║\n");
-    printf("║     • Pilha de reserva de 3 peças                           ║\n");
-    printf("║     • Operações integradas entre estruturas                 ║\n");
-    printf("║                                                              ║\n");
-    printf("║  Volte sempre para mais desafios! 🚀                        ║\n");
-    printf("║                                                              ║\n");
-    printf("╚══════════════════════════════════════════════════════════════╝\n");
+void gerarPecasAleatorias(FilaCircular* filaPtr) {
+    char tipos[] = {'I', 'O', 'T', 'S', 'Z', 'J', 'L'};
+    for (int i = 0; i < 5; i++) {
+        char tipoAleatorio = tipos[rand() % 7];
+        Peca novaPeca = criarPeca(tipoAleatorio, proximoId++);
+        inserirPecaNaFila(filaPtr, novaPeca);
+    }
 }
 
-/*
- * ═══════════════════════════════════════════════════════════════════════════════
- *                              FUNÇÃO PRINCIPAL
- * ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * @brief Transfere uma peça da fila para a pilha
+ * @param filaPtr Ponteiro para a fila
+ * @param pilhaPtr Ponteiro para a pilha
  */
+void transferirPecaFilaParaPilha(FilaCircular* filaPtr, PilhaReserva* pilhaPtr) {
+    if (!filaVazia(filaPtr) && !pilhaCheia(pilhaPtr)) {
+        Peca peca = jogarPecaDaFila(filaPtr);
+        reservarPeca(pilhaPtr, peca);
+        printf("Peca %c transferida da fila para a pilha de reserva.\n", peca.tipo);
+    }
+}
 
 /**
- * @brief Função principal que controla o fluxo do jogo Tetris Stack - Nível Adventurer
- * 
- * Esta função implementa o loop principal do jogo:
- * 1. Inicializa as estruturas de dados (fila circular e pilha de reserva)
- * 2. Gera peças iniciais para começar o jogo
- * 3. Executa o loop interativo do menu
- * 4. Processa as escolhas do usuário
- * 5. Gerencia as operações entre fila e pilha
- * 
- * O programa oferece funcionalidades completas do Nível Adventurer:
- * - Fila circular para 5 peças com operações enqueue/dequeue
- * - Pilha linear para 3 peças reservadas com operações push/pop
- * - Integração entre fila e pilha para estratégias avançadas
- * - Interface visual completa e intuitiva
- * 
- * @return int Código de saída do programa (0 = sucesso)
- * 
- * @note Utiliza srand(time(NULL)) para garantir aleatoriedade das peças
- * @note Implementa validações completas para todas as operações
- * @note Oferece feedback inteligente baseado no estado das estruturas
- * 
- * @see FilaCircular
- * @see PilhaReserva
- * @see gerarNovaPeca()
- * 
- * @example
- * Fluxo típico de execução:
- * @code{.c}
- * // 1. Inicialização automática das estruturas
- * // 2. Exibição do estado inicial
- * // 3. Loop interativo:
- * //    - Mostrar menu contextual
- * //    - Processar escolha do usuário
- * //    - Atualizar estruturas
- * //    - Gerar novas peças automaticamente
- * // 4. Encerramento com mensagem de despedida
- * @endcode
+ * @brief Exibe o estado completo do sistema
+ * @param filaPtr Ponteiro para a fila
+ * @param pilhaPtr Ponteiro para a pilha
+ * @param sistemaPtr Ponteiro para o sistema Expert
+ */
+void exibirEstadoCompleto(FilaCircular* filaPtr, PilhaReserva* pilhaPtr, SistemaExpert* sistemaPtr) {
+    printf("\n===============================================================\n");
+    printf("                    ESTADO ATUAL DO SISTEMA\n");
+    printf("===============================================================\n");
+    
+    exibirFila(filaPtr);
+    exibirPilha(pilhaPtr);
+    exibirEstatisticasExpert(sistemaPtr);
+}
+
+/**
+ * @brief Exibe o menu principal
+ */
+void exibirMenu() {
+    printf("\n+==============================================================+\n");
+    printf("|                    TETRIS EXPERT SYSTEM                     |\n");
+    printf("+==============================================================+\n");
+    printf("| 1. Jogar peca da fila                                       |\n");
+    printf("| 2. Jogar peca da pilha de reserva                           |\n");
+    printf("| 3. Transferir peca da fila para reserva                     |\n");
+    printf("| 4. Gerar novas pecas aleatorias                             |\n");
+    printf("| 5. Exibir estado completo                                   |\n");
+    printf("| 6. Exibir estatisticas Expert                               |\n");
+    printf("| 7. Otimizar sistema Expert                                  |\n");
+    printf("| 8. Gerar relatorio Expert                                   |\n");
+    printf("| 0. Sair                                                     |\n");
+    printf("+==============================================================+\n");
+    printf("Escolha uma opcao: ");
+}
+
+/**
+ * @brief Pausa a execução aguardando entrada do usuário
+ */
+void pausarExecucao() {
+    printf("\nPressione Enter para continuar...");
+    getchar();
+}
+
+/**
+ * @brief Função principal do programa
+ * @return Código de saída
  */
 int main() {
-    // ═══════════════════════════════════════════════════════════════════════════
-    //                           INICIALIZAÇÃO DO SISTEMA
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Inicialização das estruturas
+    FilaCircular fila;
+    PilhaReserva pilha;
+    SistemaExpert sistema;
     
-    // Inicializa gerador de números aleatórios com seed baseada no tempo atual
-    srand(time(NULL));
+    inicializarFila(&fila);
+    inicializarPilha(&pilha);
+    inicializarSistemaExpert(&sistema);
     
-    // Declaração das estruturas principais
-    FilaCircular filaDeJogo;        // Fila circular para 5 peças
-    PilhaReserva pilhaReserva;      // Pilha linear para 3 peças reservadas
-    int opcaoEscolhida;             // Opção selecionada pelo usuário
-    int contadorPecasJogadas = 0;   // Estatística de peças jogadas
+    // Gerar peças iniciais
+    srand((unsigned int)time(NULL));
+    gerarPecasAleatorias(&fila);
     
-    // Inicialização das estruturas de dados
-    inicializarFilaCircular(&filaDeJogo);
-    inicializarPilhaReserva(&pilhaReserva);
+    int opcao;
     
-    // Exibe mensagem de boas-vindas
-    exibirBoasVindas();
-    
-    // Mostra estado inicial completo
-    exibirEstadoCompleto(&filaDeJogo, &pilhaReserva);
-    
-    // ═══════════════════════════════════════════════════════════════════════════
-    //                              LOOP PRINCIPAL
-    // ═══════════════════════════════════════════════════════════════════════════
+    printf("+==============================================================+\n");
+    printf("|              BEM-VINDO AO TETRIS EXPERT SYSTEM               |\n");
+    printf("|                                                              |\n");
+    printf("|  Sistema inteligente de analise de jogabilidade Tetris      |\n");
+    printf("|  com estatisticas avancadas e otimizacao automatica         |\n");
+    printf("+==============================================================+\n");
     
     do {
-        // Exibe menu contextual e captura opção do usuário
-        exibirMenuPrincipal(&filaDeJogo, &pilhaReserva);
-        scanf("%d", &opcaoEscolhida);
+        exibirMenu();
+        scanf("%d", &opcao);
+        getchar(); // Limpar buffer
         
-        // Processa a opção escolhida
-        switch (opcaoEscolhida) {
+        switch (opcao) {
             case 1: {
-                // ═══════════════════════════════════════════════════════════════
-                //                    JOGAR PEÇA DA FILA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n🎮 Processando jogada...\n");
-                // Validação otimizada com early return
-                if (!verificarFilaVazia(&filaDeJogo)) {
-                    // Remove peça da frente da fila
-                    Peca pecaJogada = removerPecaDaFila(&filaDeJogo);
-                    contadorPecasJogadas++;
-                    
-                    printf("✅ Peça %c%d foi jogada com sucesso!\n", 
-                           pecaJogada.tipo, pecaJogada.id);
-                    printf("   📊 Peças restantes na fila: %d/5\n", 
-                           filaDeJogo.quantidadePecas);
-                    
-                    // Gera automaticamente uma nova peça se houver espaço
-                    if (!verificarFilaCheia(&filaDeJogo)) {
-                        Peca novaPecaGerada = gerarNovaPeca();
-                        inserirPecaNaFila(&filaDeJogo, novaPecaGerada);
-                        printf("   🔄 Nova peça %c%d gerada automaticamente\n", 
-                               novaPecaGerada.tipo, novaPecaGerada.id);
-                    }
+                if (!filaVazia(&fila)) {
+                    Peca peca = jogarPecaDaFila(&fila);
+                    processarJogadaExpert(peca, 0, &sistema);
+                    printf("Peca %c (ID: %d) jogada da fila!\n", peca.tipo, peca.id);
                 } else {
-                    printf("❌ Impossível jogar: fila está vazia!\n");
-                    printf("   💡 Dica: Gere novas peças primeiro (opção 4)\n");
+                    printf("Fila vazia! Gere novas pecas primeiro.\n");
                 }
+                pausarExecucao();
                 break;
             }
-            
             case 2: {
-                // ═══════════════════════════════════════════════════════════════
-                //                 RESERVAR PEÇA DA FILA NA PILHA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n📦 Processando reserva de peça...\n");
-                // Validação otimizada com múltiplas condições
-                if (verificarFilaVazia(&filaDeJogo)) {
-                    printf("❌ Impossível reservar: fila está vazia!\n");
-                    printf("   💡 Dica: Gere novas peças primeiro (opção 4)\n");
-                } else if (verificarPilhaCheia(&pilhaReserva)) {
-                    printf("❌ Impossível reservar: pilha está cheia!\n");
-                    printf("   💡 Dica: Use peças reservadas primeiro (opção 3)\n");
+                if (!pilhaVazia(&pilha)) {
+                    Peca peca = jogarPecaDaPilha(&pilha);
+                    processarJogadaExpert(peca, 1, &sistema);
+                    printf("Peca %c (ID: %d) jogada da pilha de reserva!\n", peca.tipo, peca.id);
                 } else {
-                    Peca pecaReservada = removerPecaDaFila(&filaDeJogo);
-                    reservarPecaNaPilha(&pilhaReserva, pecaReservada);
-                    printf("✅ Peça %c%d foi reservada na pilha!\n", 
-                           pecaReservada.tipo, pecaReservada.id);
-                    printf("   📊 Peças na fila: %d/5 | Peças reservadas: %d/3\n", 
-                           filaDeJogo.quantidadePecas, pilhaReserva.quantidadeReservada);
-                    
-                    // Gera automaticamente uma nova peça se houver espaço
-                    if (!verificarFilaCheia(&filaDeJogo)) {
-                        Peca novaPecaGerada = gerarNovaPeca();
-                        inserirPecaNaFila(&filaDeJogo, novaPecaGerada);
-                        printf("   🔄 Nova peça %c%d gerada automaticamente\n", 
-                               novaPecaGerada.tipo, novaPecaGerada.id);
-                    }
+                    printf("Pilha de reserva vazia!\n");
                 }
+                pausarExecucao();
                 break;
             }
-            
             case 3: {
-                // ═══════════════════════════════════════════════════════════════
-                //                   USAR PEÇA RESERVADA DA PILHA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n🎯 Processando uso de peça reservada...\n");
-                
-if (verificarPilhaVazia(&pilhaReserva)) {
-                    printf("❌ Impossível usar: pilha está vazia!\n");
-                    printf("   💡 Dica: Reserve peças primeiro (opção 2)\n");
-                } else {
-                    Peca pecaUsada = usarPecaDaPilha(&pilhaReserva);
-                    printf("✅ Peça reservada %c%d foi usada com sucesso!\n", 
-                           pecaUsada.tipo, pecaUsada.id);
-                    printf("   📊 Peças reservadas restantes: %d/3\n", 
-                           pilhaReserva.quantidadeReservada);
-                }
+                transferirPecaFilaParaPilha(&fila, &pilha);
+                pausarExecucao();
                 break;
             }
-            
             case 4: {
-                // ═══════════════════════════════════════════════════════════════
-                //                      GERAR NOVA PEÇA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n🔄 Processando geração de nova peça...\n");
-                
-if (verificarFilaCheia(&filaDeJogo)) {
-                    printf("❌ Impossível gerar: fila está cheia!\n");
-                    printf("   💡 Dica: Jogue ou reserve peças primeiro (opções 1 ou 2)\n");
-                } else {
-                    Peca novaPecaGerada = gerarNovaPeca();
-                    inserirPecaNaFila(&filaDeJogo, novaPecaGerada);
-                    printf("✅ Nova peça %c%d gerada e adicionada à fila!\n", 
-                           novaPecaGerada.tipo, novaPecaGerada.id);
-                    printf("   📊 Peças na fila: %d/5\n", filaDeJogo.quantidadePecas);
-                }
+                gerarPecasAleatorias(&fila);
+                printf("Novas pecas geradas na fila!\n");
+                pausarExecucao();
                 break;
             }
-            
             case 5: {
-                // ═══════════════════════════════════════════════════════════════
-                //                    EXIBIR ESTADO COMPLETO
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n📊 Atualizando visualização completa...\n");
-                exibirEstadoCompleto(&filaDeJogo, &pilhaReserva);
+                exibirEstadoCompleto(&fila, &pilha, &sistema);
+                pausarExecucao();
                 break;
             }
-            
+            case 6: {
+                exibirEstatisticasExpert(&sistema);
+                pausarExecucao();
+                break;
+            }
+            case 7: {
+                if (otimizarSistemaExpert(&sistema)) {
+                    printf("Sistema Expert otimizado com sucesso!\n");
+                } else {
+                    printf("Sistema Expert ja esta otimizado.\n");
+                }
+                pausarExecucao();
+                break;
+            }
+            case 8: {
+                gerarRelatorioExpert(&sistema);
+                pausarExecucao();
+                break;
+            }
             case 0: {
-                // ═══════════════════════════════════════════════════════════════
-                //                        SAIR DO PROGRAMA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n👋 Encerrando o jogo...\n");
-                exibirDespedida();
+                printf("\n+==============================================================+\n");
+                printf("|                    OBRIGADO POR JOGAR!                      |\n");
+                printf("|                                                              |\n");
+                printf("|  Pontuacao Final: %8d                               |\n", sistema.pontuacaoTotal);
+                printf("|  Nivel Alcancado: %3d                                    |\n", sistema.nivelAtual);
+                printf("|  Melhor Combo: %3d                                       |\n", sistema.melhorCombo);
+                printf("+==============================================================+\n");
                 break;
             }
-                
-            default:
-                // ═══════════════════════════════════════════════════════════════
-                //                       OPÇÃO INVÁLIDA
-                // ═══════════════════════════════════════════════════════════════
-                printf("\n❌ Opção inválida! Por favor, escolha uma opção válida.\n");
-                printf("   💡 Opções disponíveis: 0, 1, 2, 3, 4, 5\n");
+            default: {
+                printf("Opcao invalida! Tente novamente.\n");
+                pausarExecucao();
                 break;
+            }
         }
-        
-        // Pausa para o usuário ler as mensagens antes de continuar
-        if (opcaoEscolhida != 0 && opcaoEscolhida != 5) {
-            printf("\n⏸️  Pressione Enter para continuar...");
-            getchar(); // Limpa buffer do scanf
-            getchar(); // Aguarda Enter do usuário
-        }
-        
-    } while (opcaoEscolhida != 0);
+    } while (opcao != 0);
     
-    // ═══════════════════════════════════════════════════════════════════════════
-    //                              FINALIZAÇÃO
-    // ═══════════════════════════════════════════════════════════════════════════
-    
-    printf("\n🎯 Programa finalizado com sucesso!\n");
-    printf("   Obrigado por jogar Tetris Stack - Nível Adventurer!\n\n");
-    
-    return 0; // Indica execução bem-sucedida
+    return 0;
 }
 
